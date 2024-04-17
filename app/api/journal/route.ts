@@ -3,7 +3,8 @@ import {prisma} from "@/utils/db";
 import {NextResponse} from "next/server";
 import {revalidatePath} from "next/cache";
 
-export const POST = async () => {
+
+export async function POST(request: Request) {
     const user = await getUserByClerkID();
     const entry = await prisma.journalEntry.create({
         data: {
@@ -11,7 +12,9 @@ export const POST = async () => {
             content: 'Write about your day',
         }
     });
-    console.log('Revalidating path');
     revalidatePath('/journal');
     return NextResponse.json({data:entry});
+
 }
+/*
+*/

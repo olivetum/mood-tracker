@@ -7,7 +7,6 @@ import EntryCard from "@/components/EntryCard";
 import Link from "next/link";
 
 const getEntries = async () => {
-   // @ts-ignore
     const user = await  getUserByClerkID();
     const entries = await prisma.journalEntry.findMany({
         where: {
