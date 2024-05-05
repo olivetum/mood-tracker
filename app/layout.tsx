@@ -22,7 +22,11 @@ export default function RootLayout({
 }>) {
   return (
       <ClerkProvider>
-        <html lang="en" data-theme="light">
+        <html
+            lang="en"
+            data-theme="light"
+            title="Mood by Moonfleet"
+        >
           <body
               className={cn(
                   "min-h-screen bg-background font-sans antialiased",
