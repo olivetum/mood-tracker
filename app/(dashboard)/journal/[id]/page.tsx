@@ -1,6 +1,7 @@
 import Editor from "@/components/Editor"
 import {getUserByClerkID} from "@/utils/auth";
 import {prisma} from "@/utils/db";
+import {id} from "postcss-selector-parser";
 const
 getEntry = async (id: any) => {
     const user = await getUserByClerkID()
@@ -12,15 +13,24 @@ getEntry = async (id: any) => {
                 id,
             }
         },
+        include: {
+            analysis: true,
+        }
     })
     return entry
 }
 // @ts-ignore
 const EntryPage = async ({params}) => {
-    const entry = await getEntry(params.id)
-    return (<div>
-        <Editor entry={entry}/>
-    </div>
+    const entry = await getEntry(params.id);
+    // @ts-ignore
+
+    return (
+        <div className="w-full h-full">
+            <div className="">
+                <Editor entry={entry}/>
+            </div>
+
+        </div>
     )
 }
 

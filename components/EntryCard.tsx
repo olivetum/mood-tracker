@@ -1,12 +1,13 @@
 // @ts-ignore
 const EntryCard = ({entry}) => {
-    const date = new Date(entry.createdAt).toDateString()
+    const date = new Date(entry.createdAt).toDateString();
+    console.log(entry)
     return (
     <div
-        className="divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow">
-        <div className="px-4 py-5 sm:px-6">{date}</div>
-        <div className="px-4 py-5 sm:p-6">Summary</div>
-        <div className="px-4 py-4 sm:px-6">Mood</div>
+        className=" flex flex-col gap-4 px-4 py-6 overflow-hidden rounded-lg bg-white/30 shadow">
+        <div className="text-sm">{date}</div>
+        <div className="text-xl font-medium">{entry.content}</div>
+        <div className="">Mood</div>
     </div>
     )
 }
