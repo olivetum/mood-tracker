@@ -29,7 +29,7 @@ const Editor = ({ entry }) => {
     })
     return (
         <div className="w-full h-full grid md:grid-cols-7 gap-4 md:gap-24 md:px-24">
-           <div className="md:col-span-5 col-span-7 order-1 md:order-10">
+           <div className="md:col-span-5 col-span-7 order-1">
                {isLoading ? <div>...loading</div> : <div></div> }
                <textarea
                    className="md:mt-12 rounded bg-white/30 w-full md:h-full px-8 py-4 text-xl outline-none h-[400px]"
@@ -38,7 +38,7 @@ const Editor = ({ entry }) => {
                />
            </div>
 
-           <div className="md:col-span-2">
+           <div className="md:col-span-2 md:order-2">
                <div
                    className="pt-4 my-8">
                    <h2 className="md:text-2xl font-medium md:mb-6">Analysis</h2>
