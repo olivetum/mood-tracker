@@ -12,7 +12,7 @@ const links = [
     {href: "/history", label: 'History'},
 ]
     return (
-        <div className="h-screen w-screen relative bg-gradient-to-t from-blue-300 to-violet-100 px-2 md:px-0">
+        <div className="h-screen w-screen relative  px-2 md:px-0">
             <aside
                 className="md:absolute md:w-[200px] md:top-0 md:left-0 md:h-full md:px-8 md:pt-24 bg md:bg-white/20">
                 <div className="flex flex-cols justify-between items-center">

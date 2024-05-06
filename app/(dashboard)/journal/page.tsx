@@ -27,7 +27,7 @@ const getEntries = async () => {
 const JournalPage = async () => {
     const entries = await getEntries();
     return (
-        <div className="md:p-10 mt-12 md:mt-0">
+        <div className="md:p-10 mt-12 md:mt-0 pb-12">
             <h2 className="text-2xl mb-8">Journal</h2>
             <Question/>
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 ">

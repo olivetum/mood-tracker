@@ -9,17 +9,23 @@ import { MemoryVectorStore } from "langchain/vectorstores/memory";
 
 const parser = StructuredOutputParser.fromZodSchema(
     z.object({
-        sentimentScore: z.number().describe('Sentiment of the text on a scale from -10 to 10, where -10 is extremely negative, 0 is neutral, and 10 is extremely positive.'),
+        sentimentScore: z
+            .number()
+            .describe('Sentiment of the text on a scale from -10 to 10, where -10 is extremely negative, 0 is neutral, and 10 is extremely positive.'),
         mood: z
             .string()
-            .describe('the mood of the person who wrote the journal entry.'),
-        subject: z.string().describe('the subject of the journal entry.'),
+            .describe('the mood of the person who wrote the journal entry. if entry is gibberish or empty reply \'no mood\''),
+        subject: z
+            .string()
+            .describe('the subject of the journal entry. if entry is gibberish or empty reply \'Write your entry\''),
         negative: z
             .boolean()
             .describe(
                 'is the journal entry negative? (i.e. does it contain negative emotions?).'
             ),
-        summary: z.string().describe('quick summary of the entire entry.'),
+        summary: z
+            .string()
+            .describe('quick summary of the entire entry. if entry is gibberish or empty reply \'Write your entry\''),
         color: z
             .string()
             .describe(
@@ -43,6 +49,7 @@ const getPrompt = async (content) => {
         entry: content,
     });
 
+    console.log(input)
     return input;
 }
 export const analyze = async (content: BaseLanguageModelInput) => {

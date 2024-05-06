@@ -4,7 +4,7 @@ const EntryCard = ({entry}) => {
     console.log(entry)
     return (
     <div
-        className="flex flex-col gap-4 px-4 py-6 overflow-hidden rounded-lg bg-white/30 shadow">
+        className="flex flex-col gap-4 px-4 py-6 ring-1 ring-violet-300 overflow-hidden rounded-lg bg-white/30 shadow">
         <div className="text-sm">{date}</div>
         <div className="text-xl font-medium ">{entry.content}</div>
         <div className="flex items-center">

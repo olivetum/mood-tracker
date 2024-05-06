@@ -26,15 +26,17 @@ const Editor = ({ entry }) => {
             setAnalysis(data.analysis)
             setIsLoading(false)
         },
-    })
+    });
+
     return (
         <div className="w-full h-full grid md:grid-cols-7 gap-4 md:gap-24 md:px-24">
            <div className="md:col-span-5 col-span-7 order-1">
                {isLoading ? <div>...loading</div> : <div></div> }
                <textarea
                    className="md:mt-12 rounded bg-white/30 w-full md:h-full px-8 py-4 text-xl outline-none h-[400px]"
-                   value={value} onChange={e =>
-                   setValue(e.target.value)}
+                   value={value}
+                   onChange={e => setValue(e.target.value)}
+                   placeholder="Write your entry"
                />
            </div>
 

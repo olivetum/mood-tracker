@@ -5,7 +5,7 @@ export default async function Home() {
   let href = userId ? '/journal' : '/new-user';
 
   return (
-      <div className="w-screen h-screen bg-white flex justify-center items-center text-black/80 bg-center bg-gradient-to-t from-blue-300 to-violet-100 px-4"
+      <div className="w-screen h-screen max-h-full bg-white flex justify-center items-center text-black/80 bg-center  px-4"
       >
 
           <div className="w-full max-w-[95ch] m-auto backdrop-blur-3xl text-white pt-12 pb-8 pl-12 pr-24 rounded-2xl bg-white/40">
