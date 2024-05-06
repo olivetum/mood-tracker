@@ -28,25 +28,25 @@ const Editor = ({ entry }) => {
         },
     })
     return (
-        <div className="w-full h-full grid grid-cols-7 gap-24 px-24">
-           <div className="col-span-5">
+        <div className="w-full h-full grid md:grid-cols-7 gap-4 md:gap-24 md:px-24">
+           <div className="md:col-span-5 col-span-7 order-1 md:order-10">
                {isLoading ? <div>...loading</div> : <div></div> }
                <textarea
-                   className="mt-12 rounded bg-white/30 w-full h-full px-8 py-12 text-xl outline-none"
+                   className="md:mt-12 rounded bg-white/30 w-full md:h-full px-8 py-4 text-xl outline-none h-[400px]"
                    value={value} onChange={e =>
                    setValue(e.target.value)}
                />
            </div>
 
-           <div className="col-span-2">
+           <div className="md:col-span-2">
                <div
                    className="pt-4 my-8">
-                   <h2 className="text-2xl font-medium mb-6">Analysis</h2>
+                   <h2 className="md:text-2xl font-medium md:mb-6">Analysis</h2>
                    <div className="h-1 w-full rounded"
                         style={{backgroundColor: color}}></div>
                </div>
                <div>
-                   <ul className="flex flex-col gap-4">
+                   <ul className="flex flex-col md:gap-4 gap-1 text-sm">
                        {analysisData.map(item => {
                            return (
                                <li key={item.name}> {item.name}: {item.value} </li>
