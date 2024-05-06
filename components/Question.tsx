@@ -20,22 +20,22 @@ const Question = () => {
     }
     console.log(response.data);
     return (
-        <div>
+        <div className="">
             <form
                 onSubmit={handleSubmit}
-                className="mb-6">
+                className="mb-6 flex flex-row w-full">
                 <input
                     disabled={loading}
                     onChange={onChange}
                     value={value}
                     type="text"
                     placeholder="Ask a question"
-                    className="border border-black/20 px-4 py-2 rounded-lg"
+                    className="border border-black/20 px-4 py-2 rounded-lg grow"
                 />
                 <button
                         disabled={loading}
                     type="submit"
-                    className="ml-2 bg-gradient-to-br from-indigo-700 to-blue-500 py-2 px-4 rounded-lg font-semibold text-emerald-950 text-white">
+                    className="ml-2 bg-gradient-to-br from-indigo-700 to-blue-500 py-2 px-4 rounded-lg font-semibold  text-white grow-0">
                     Ask
                 </button>
             </form>

@@ -30,7 +30,7 @@ const Editor = ({ entry }) => {
     return (
         <div className="w-full h-full grid grid-cols-7 gap-24 px-24">
            <div className="col-span-5">
-               {isLoading && <div>...loading</div>}
+               {isLoading ? <div>...loading</div> : <div></div> }
                <textarea
                    className="mt-12 rounded bg-white/30 w-full h-full px-8 py-12 text-xl outline-none"
                    value={value} onChange={e =>

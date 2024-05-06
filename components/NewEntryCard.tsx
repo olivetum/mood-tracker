@@ -11,7 +11,7 @@ const NewEntryCard = () => {
 
     return (
         <div
-            className="cursor-pointer overflow-hidden rounded-lg bg-white shadow"
+            className="cursor-pointer overflow-hidden rounded-lg bg-white"
             onClick={handleOnClick}
         >
             <div className="px-4 py-5 sm:p-6">
