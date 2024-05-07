@@ -5,6 +5,20 @@ const createURL = (path: string) => {
     return window.location.origin + path;
 }
 
+export const deleteEntry = async (id: any) => {
+    const res = await fetch(
+        new Request(createURL(`/api/journal/${id}`), {
+            method: 'delete',
+        })
+    )
+
+    if (res.ok) {
+        return res.json()
+    } else {
+        throw new Error('Something went wrong on API server!')
+    }
+}
+
 export const updateEntry = async (id: any, content: any) => {
     const res = await fetch(new Request(createURL(`/api/journal/${id}`), {
             method: 'PATCH',
@@ -21,10 +35,9 @@ export const createNewEntry = async () => {
         new Request(
             createURL('/api/journal'), {
             method: 'POST',
-            body: JSON.stringify({ content: 'new entry' }),
+            body: JSON.stringify({ content: '' }),
         })
     )
-
     if (res.ok) {
         return res.json()
     } else {

@@ -2,13 +2,16 @@
 // @ts-ignore
 import {useState} from "react";
 import {useAutosave} from "react-autosave";
-import {updateEntry} from "@/utils/api";
+import {deleteEntry, updateEntry} from "@/utils/api";
+import {router} from "next/client";
+import {useRouter} from "next/navigation";
 
 // @ts-ignore
 const Editor = ({ entry }) => {
     const [value, setValue] = useState(entry.content);
     const [isLoading, setIsLoading] = useState(false);
     const [analysis, setAnalysis] = useState(entry.analysis)
+    const router = useRouter()
 
     const { mood, subject, summary, color, negative } = analysis
     const analysisData = [
@@ -18,13 +21,20 @@ const Editor = ({ entry }) => {
         {name: 'Negative', value: negative ? 'true' : 'false'},
     ]
 
+    const handleDelete = async () => {
+        await deleteEntry(entry.id)
+        router.push('/journal')
+    }
+
     useAutosave({
         data: value,
         onSave: async (_value) => {
-            setIsLoading(true)
-            const data = await updateEntry(entry.id, _value);
-            setAnalysis(data.analysis)
-            setIsLoading(false)
+            if (value.length > 160) {
+                setIsLoading(true)
+                const data = await updateEntry(entry.id, _value);
+                setAnalysis(data.analysis)
+                setIsLoading(false)
+            } else {return}
         },
     });
 
@@ -55,12 +65,21 @@ const Editor = ({ entry }) => {
                            )
                        })
                        }
+                       <li className="py-4 px-8 flex items-center justify-between">
+                           <button
+                               onClick={handleDelete}
+                               type="button"
+                               className="rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
+                           >
+                               Delete
+                           </button>
+                       </li>
                    </ul>
                </div>
            </div>
-       </div>
+        </div>
 
 
-   )
+)
 }
 export default Editor
