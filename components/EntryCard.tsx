@@ -1,7 +1,7 @@
 // @ts-ignore
 const EntryCard = ({entry}) => {
     const date = new Date(entry.createdAt).toDateString();
-    console.log(entry)
+    console.log(`entry >>>> ${entry}`)
     return (
     <div
         className="flex flex-col gap-4 px-4 py-6 ring-1 ring-violet-300 overflow-hidden rounded-lg bg-white/30 shadow">

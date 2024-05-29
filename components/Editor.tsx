@@ -1,10 +1,11 @@
 'use client'
 // @ts-ignore
-import {useState} from "react";
+import React, {useState} from "react";
 import {useAutosave} from "react-autosave";
 import {deleteEntry, updateEntry} from "@/utils/api";
 import {router} from "next/client";
 import {useRouter} from "next/navigation";
+import {Card, Button, Spinner, Text, TextArea} from "@radix-ui/themes";
 
 // @ts-ignore
 const Editor = ({ entry }) => {
@@ -29,53 +30,60 @@ const Editor = ({ entry }) => {
     useAutosave({
         data: value,
         onSave: async (_value) => {
-            if (value.length > 160) {
                 setIsLoading(true)
                 const data = await updateEntry(entry.id, _value);
                 setAnalysis(data.analysis)
                 setIsLoading(false)
-            } else {return}
         },
     });
 
     return (
-        <div className="w-full h-full grid md:grid-cols-7 gap-4 md:gap-24 md:px-24">
-           <div className="md:col-span-5 col-span-7 order-1">
-               {isLoading ? <div>...loading</div> : <div></div> }
-               <textarea
+        <div className="w-full h-full md:grid md:grid-cols-7 gap-4 md:gap-24 md:px-24">
+           <div className="md:col-span-5 col-span-7 order-1 mt-12">
+               <TextArea
                    className="md:mt-12 rounded bg-white/30 w-full md:h-full px-8 py-4 text-xl outline-none h-[400px]"
                    value={value}
                    onChange={e => setValue(e.target.value)}
                    placeholder="Write your entry"
                />
+               {isLoading ? <Spinner size="2"/> : <div></div> }
            </div>
 
            <div className="md:col-span-2 md:order-2">
-               <div
-                   className="pt-4 my-8">
-                   <h2 className="md:text-2xl font-medium md:mb-6">Analysis</h2>
-                   <div className="h-1 w-full rounded"
-                        style={{backgroundColor: color}}></div>
-               </div>
-               <div>
-                   <ul className="flex flex-col md:gap-4 gap-1 text-sm">
+
+                   <div className={`mt-16 w-full`}>
+                       <div>
+                           <h2 className="md:text-2xl font-medium md:mb-6">Analysis</h2>
+                           <div className="h-1 w-full rounded" style={{backgroundColor: color}}></div>
+                       </div>
+                       <div className={`grid grid-cols-4 gap-4 py-4`}>
                        {analysisData.map(item => {
                            return (
-                               <li key={item.name}> {item.name}: {item.value} </li>
+                               <Card variant="surface">
+                                   <Text as="div" size="2" weight="bold">
+                                       {item.name}
+                                   </Text>
+                                   <Text as="div" color="gray" size="2">
+                                       {item.value}
+                                   </Text>
+                               </Card>
                            )
                        })
                        }
-                       <li className="py-4 px-8 flex items-center justify-between">
-                           <button
-                               onClick={handleDelete}
-                               type="button"
-                               className="rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
-                           >
-                               Delete
-                           </button>
-                       </li>
-                   </ul>
-               </div>
+                       </div>
+                       <Button
+                           onClick={handleDelete}
+                           type="button"
+                           color="red"
+                           size="4"
+                           className="!w-[100%]"
+                       >
+                           Delete Entry
+                       </Button>
+                   </div>
+
+
+
            </div>
         </div>
 

@@ -25,7 +25,7 @@ const parser = StructuredOutputParser.fromZodSchema(
             ),
         summary: z
             .string()
-            .describe('quick summary of the entire entry. if entry is gibberish or empty reply \'Write your entry\'. The summary can\'t be longer then 120 characters'),
+            .describe('quick summary of the entire entry. if entry is gibberish or empty reply \'Write your entry\'.'),
         color: z
             .string()
             .describe(
@@ -35,11 +35,11 @@ const parser = StructuredOutputParser.fromZodSchema(
 )
 
 
-const getPrompt = async (content) => {
+const getPrompt = async (content: BaseLanguageModelInput) => {
     const format_instructions = parser.getFormatInstructions();
 
     const prompt = new PromptTemplate({
-        template: 'Analyze the following journal entry. First: make sure that entry is not an empty string IF IT IS - return empty string for each field!. If it is not empty: Follow the instructions and format your response to math the format instruction, no matter what! ' +
+        template: 'Analyze the following journal entry. If it is not empty: Follow the instructions and format your response to math the format instruction, no matter what! ' +
             '\n {format_instructions}\n{entry}',
         inputVariables: ['entry'],
         partialVariables: { format_instructions },
@@ -57,14 +57,12 @@ export const analyze = async (content: BaseLanguageModelInput) => {
     const model = new OpenAI({temperature: 0, modelName: 'gpt-3.5-turbo'});
     const result = await model.invoke(input);
 
-    if (input.length > 160) {
         try {
             return parser.parse(result);
         } catch (e) {
             console.log(e);
-        }
 
-    } else { return }
+    }
 }
 
 export const qa = async (question: string, entries: any[]) => {

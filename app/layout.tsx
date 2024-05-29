@@ -1,15 +1,19 @@
 import { ClerkProvider } from '@clerk/nextjs'
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import { Inter as FontSans } from "next/font/google"
-import "./globals.css";
+import {Theme} from "@radix-ui/themes";
+import {Inter, Playfair} from "next/font/google"
 import { cn } from "@/lib/utils"
+import '@radix-ui/themes/styles.css';
+import "./globals.css";
 
-const fontSans = FontSans({
+const inter = Inter({
     subsets: ["latin"],
-    variable: "--font-sans",
-})
-
+    variable: '--font-inter',
+});
+const playfair = Playfair({
+    subsets: ["latin"],
+    variable: '--font-playfair',
+});
 export const metadata: Metadata = {
   title: "Mood by Moonfleet",
   description: "AI mood tracker",
@@ -24,15 +28,15 @@ export default function RootLayout({
       <ClerkProvider>
         <html
             lang="en"
-            data-theme="light"
+            className={`${inter.variable} ${playfair.variable}`}
+
         >
           <body
-              className={cn(
-                  "min-h-screen bg-gradient-to-b via-blue-100 from-violet-100 to-white font-sans antialiasing bg-no-repeat",
-                  fontSans.variable
-              )}
+              className={cn("min-h-screen")}
           >
-              {children}
+              <Theme appearance="light" accentColor="indigo" panelBackground="translucent">
+                  {children}
+              </Theme>
           </body>
         </html>
       </ClerkProvider>
